@@ -130,7 +130,7 @@ int hidecursor = 1;
  *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
  * 0: disable (render all U25XX glyphs normally from the font).
  */
-const int boxdraw = 0;
+const int boxdraw = 1;
 const int boxdraw_bold = 0;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
@@ -416,8 +416,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },
 	#if ALPHA_PATCH
-	{ TERMMOD,              XK_O,           changealpha,     {.f = +0.05} },
-	{ TERMMOD,              XK_P,           changealpha,     {.f = -0.05} },
+	{ MODKEY|ShiftMask,     XK_L,           changealpha,     {.f = +0.05} },
+	{ MODKEY|ShiftMask,     XK_H,           changealpha,     {.f = -0.05} },
 	#if ALPHA_FOCUS_HIGHLIGHT_PATCH
 	//{ TERMMOD,              XK_,           changealphaunfocused, {.f = +0.05} },
 	//{ TERMMOD,              XK_,           changealphaunfocused, {.f = -0.05} },
@@ -446,7 +446,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_o,           opencopied,      {.v = "xdg-open"} },
 	#endif // OPENCOPIED_PATCH
 	#if NEWTERM_PATCH
-	{ TERMMOD,              XK_Return,      newterm,         {.i =  0} },
+	{ Mod4Mask|ShiftMask,   XK_Return,      newterm,         {.i =  0} },
 	#endif // NEWTERM_PATCH
 	#if EXTERNALPIPE_PATCH
 	{ TERMMOD,              XK_U,           externalpipe,    { .v = openurlcmd } },
@@ -467,6 +467,9 @@ static Shortcut shortcuts[] = {
 	#if INVERT_PATCH
 	{ TERMMOD,              XK_X,           invert,          { 0 } },
 	#endif // INVERT_PATCH
+	{ ControlMask,          XK_0,           zoomreset,      {.f =  0} },
+	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
+	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
 };
 
 /*
